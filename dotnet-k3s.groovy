@@ -52,17 +52,7 @@ pipeline{
             steps{
                 script{
                     value.read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
-                    //读取项目配置文件
-                    Project_values="${env.WORKSPACE}/jenkinsfile/Values/value.yaml"
-                    if(fileExists(Project_values) == true){
-                        //项目参数
-                        println  Language+"项目参数"
-                        def Env_proj=readYaml file: Project_values
-                        //审批人
-                        env.approver=Env_proj.approver.trim()
-                    }else{
-                         error("缺少项目参数文件！")
-                    }
+                    value.read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
                 }
             
 
