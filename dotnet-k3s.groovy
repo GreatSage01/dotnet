@@ -50,8 +50,9 @@ pipeline{
     stages{
         stage("配置读取"){
             steps{
-                Com.read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
                 script{
+                    hello()
+                    //Com.read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
                     //读取项目配置文件
                     Project_values="${env.WORKSPACE}/jenkinsfile/Values/value.yaml"
                     if(fileExists(Com_values) == true){
