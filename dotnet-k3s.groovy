@@ -31,7 +31,7 @@ def git = new org.devops.git()
 pipeline{
     agent{
         kubernetes {
-            yamlFile "${env.WORKSPACE}/jenkinsfile/dotnet/config/jenkins-slave.yaml"
+            yamlFile "jenkinsfile/dotnet/config/jenkins-slave.yaml"
         }
     }
     options {
