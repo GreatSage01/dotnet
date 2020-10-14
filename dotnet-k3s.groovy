@@ -77,8 +77,24 @@ pipeline{
                         def Env_proj=readYaml file: Project_values
                         //审批人
                         env.approver=Env_proj.approver.trim()
+                    }else{
+                         error("缺少项目参数文件！")
                     }
                 }
+            
+
+
+            }
+        }
+
+        stage("验证"){
+            steps{
+                println "Prod_k8sUrl:" + Prod_k8sUrl
+                println "Prod_k8sCred:"+Prod_k8sCred
+                println "HUB_Url:"+HUB_Url
+                println "HUB_Cred:"+HUB_Cred
+                println "Git_Url:"+ Git_Url
+                println "Git_Cred: "+ Git_Cred
             }
         }
 
@@ -88,7 +104,7 @@ pipeline{
             }
             steps{
                 script{
-                    println "Git_Url: ${Git_Url}"
+
                     // 检出GIT上的源代码
                     git.gitcheckout([project_name:"${project_name}",
                                GIT_Branch:"${project_branch}",
