@@ -88,7 +88,7 @@ pipeline{
             }
             steps{
                 script{
-                    println GIT_Url
+                    println "GIT_Url:" + GIT_Url
                     // 检出GIT上的源代码
                     git.gitcheckout([project_name:"${project_name}",
                                GIT_Branch:"${project_branch}",
