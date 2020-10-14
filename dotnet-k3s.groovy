@@ -52,7 +52,7 @@ pipeline{
             steps{
                 script{
                     //读取公共配置参数文件
-                    Com_values="${env.WORKSPACE}/jenkinsfile/Values/Com/con_value.yaml"
+                    Com_values="${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml"
                     if(fileExists(Com_values) == true){
                         //提取公共参数
                         println  "构建公共参数读取"
@@ -70,7 +70,7 @@ pipeline{
                         error("缺少公共配置文件！")
                     }
                     //读取项目配置文件
-                    Project_values="${env.WORKSPACE}/jenkinsfile/Values/${Language}/value.yaml"
+                    Project_values="${env.WORKSPACE}/jenkinsfile/Values/value.yaml"
                     if(fileExists(Com_values) == true){
                         //项目参数
                         println  Language+"项目参数"
@@ -96,6 +96,8 @@ pipeline{
                 }
             }
         }
+
+
 
 
 

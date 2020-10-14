@@ -1,0 +1,11 @@
+#正式k8s
+prod_k8sUrl: https://172.16.0.113:5443
+prod_k8sCred: k8s-cert
+
+#harbor
+HUB_Url: hub.xueerqin.net
+HUB_Cred: hub_admin
+
+#git
+GIT_Url: http://git.fjfuyu.net/server-side
+GIT_Cred: git_admin
