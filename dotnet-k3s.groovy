@@ -24,9 +24,8 @@ properties([
     ])
 ])
 
-@Library('jenkinsfiles-fy') _
+@Library('Jenkins-fuyu') _
 def email = new org.email.email()
-def color = new org.devops.color()
 def git = new org.devops.git()
 
 pipeline{
