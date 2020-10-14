@@ -58,14 +58,14 @@ pipeline{
                         println  "构建公共参数读取"
                         def Env_com = readYaml  file: Com_values
                         //正式k8s
-                        env.prod_k8sUrl=Env_com.prod_k8sUrl.trim()
-                        env.prod_k8sCred=Env_com.prod_k8sCred.trim()
+                        env.Prod_k8sUrl=Env_com.Prod_k8sUrl.trim()
+                        env.Prod_k8sCred=Env_com.Prod_k8sCred.trim()
                         //harbor
                         env.HUB_Url=Env_com.HUB_Url.trim()
                         env.HUB_Cred=Env_com.HUB_Cred.trim()
                         //gitlab
-                        env.git_Url=Env_com.git_Url.trim()+ "/${project_name}" + '.git'
-                        env.git_Cred=Env_com.git_Cred.trim()
+                        env.Git_Url=Env_com.Git_Url.trim()
+                        env.Git_Cred=Env_com.Git_Cred.trim()
                     }else{
                         error("缺少公共配置文件！")
                     }
@@ -88,12 +88,12 @@ pipeline{
             }
             steps{
                 script{
-                    println "git_Url:" + git_Url
+                    println "Git_Url:"  Git_Url
                     // 检出GIT上的源代码
                     git.gitcheckout([project_name:"${project_name}",
                                GIT_Branch:"${project_branch}",
-                               GIT_Cred:"${git_Cred}",
-                               GIT_Url:"${git_Url}"])
+                               Git_Cred:"${Git_Cred}",
+                               Git_Url:"${Git_Url}"])
                 }
             }
         }
