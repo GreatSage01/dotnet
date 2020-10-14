@@ -64,8 +64,8 @@ pipeline{
                         env.HUB_Url=Env_com.HUB_Url.trim()
                         env.HUB_Cred=Env_com.HUB_Cred.trim()
                         //gitlab
-                        env.Gitlab_Url=Env_com.Gitlab_Url.trim()
-                        env.Git_Cred=Env_com.Git_Cred.trim()
+                        env.Gitlab_Url=Env_com.Gitlab_Url.trim()+"/${project_name}.git"
+                        env.Gitlab_Cred=Env_com.Gitlab_Cred.trim()
                     }else{
                         error("缺少公共配置文件！")
                     }
@@ -94,7 +94,7 @@ pipeline{
                 println "HUB_Url:"+HUB_Url
                 println "HUB_Cred:"+HUB_Cred
                 println "Gitlab_Url:"+ Gitlab_Url
-                println "Git_Cred: "+ Git_Cred
+                println "Gitlab_Cred: "+ Gitlab_Cred
             }
         }
 
@@ -107,8 +107,8 @@ pipeline{
 
                     // 检出GIT上的源代码
                     git.gitcheckout([project_name:"${project_name}",
-                               GIT_Branch:"${project_branch}",
-                               Git_Cred:"${Git_Cred}",
+                               Gitlab_Branch:"${project_branch}",
+                               Gitlab_Cred:"${Gitlab_Cred}",
                                Gitlab_Url:"${Gitlab_Url}"])
                 }
             }

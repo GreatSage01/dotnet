@@ -6,6 +6,6 @@ Prod_k8sCred: k8s-cert
 HUB_Url: hub.xueerqin.net
 HUB_Cred: hub_admin
 
-#git
+#Gitlab
 Gitlab_Url: http://git.fjfuyu.net/server-side
-Git_Cred: git_admin
+Gitlab_Cred: git_admin
