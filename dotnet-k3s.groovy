@@ -87,13 +87,17 @@ pipeline{
                 expression { "${project_switch}" == 'deploy' }
             }
             steps{
-                // 检出GIT上的源代码
-                git.gitcheckout([project_name:"${project_name}",
+                script{
+                    // 检出GIT上的源代码
+                    git.gitcheckout([project_name:"${project_name}",
                                GIT_Branch:"${project_branch}",
                                GIT_Cred:"${GIT_Cred}",
                                GIT_Url:"${GIT_Url}"])
+                }
             }
         }
+
+        
 
     }
 }
