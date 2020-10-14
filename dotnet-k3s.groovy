@@ -64,7 +64,7 @@ pipeline{
                         env.HUB_Url=Env_com.HUB_Url.trim()
                         env.HUB_Cred=Env_com.HUB_Cred.trim()
                         //gitlab
-                        env.Git_Url=Env_com.Git_Url.trim()
+                        env.Gitlab_Url=Env_com.Gitlab_Url.trim()
                         env.Git_Cred=Env_com.Git_Cred.trim()
                     }else{
                         error("缺少公共配置文件！")
@@ -93,7 +93,7 @@ pipeline{
                 println "Prod_k8sCred:"+Prod_k8sCred
                 println "HUB_Url:"+HUB_Url
                 println "HUB_Cred:"+HUB_Cred
-                println "Git_Url:"+ Git_Url
+                println "Gitlab_Url:"+ Gitlab_Url
                 println "Git_Cred: "+ Git_Cred
             }
         }
@@ -109,7 +109,7 @@ pipeline{
                     git.gitcheckout([project_name:"${project_name}",
                                GIT_Branch:"${project_branch}",
                                Git_Cred:"${Git_Cred}",
-                               Git_Url:"${Git_Url}"])
+                               Gitlab_Url:"${Gitlab_Url}"])
                 }
             }
         }
