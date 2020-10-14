@@ -50,25 +50,8 @@ pipeline{
     stages{
         stage("配置读取"){
             steps{
+                Com.read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
                 script{
-                    //读取公共配置参数文件
-                    Com_values="${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml"
-                    if(fileExists(Com_values) == true){
-                        //提取公共参数
-                        println  "构建公共参数读取"
-                        def Env_com = readYaml  file: Com_values
-                        //正式k8s
-                        env.Prod_k8sUrl=Env_com.Prod_k8sUrl.trim()
-                        env.Prod_k8sCred=Env_com.Prod_k8sCred.trim()
-                        //harbor
-                        env.HUB_Url=Env_com.HUB_Url.trim()
-                        env.HUB_Cred=Env_com.HUB_Cred.trim()
-                        //gitlab
-                        env.Gitlab_Url=Env_com.Gitlab_Url.trim()+"/${project_name}.git"
-                        env.Gitlab_Cred=Env_com.Gitlab_Cred.trim()
-                    }else{
-                        error("缺少公共配置文件！")
-                    }
                     //读取项目配置文件
                     Project_values="${env.WORKSPACE}/jenkinsfile/Values/value.yaml"
                     if(fileExists(Com_values) == true){
