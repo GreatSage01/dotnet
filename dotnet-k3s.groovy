@@ -133,6 +133,7 @@ pipeline{
                     }else if( env.Deploy_env == 'dev' ){
                         echo "dev docker image build"
                     }
+                    dot.ImagesBuild([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
                 }
             }
         }
@@ -143,7 +144,6 @@ pipeline{
             }
             steps{
                 script{
-                    //dot.ImagesBuild([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
                     dot.Deploy()
                 }
             }           
