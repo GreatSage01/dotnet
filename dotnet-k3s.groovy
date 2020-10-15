@@ -28,6 +28,7 @@ properties([
 def email = new org.email.email()
 def git = new org.devops.git()
 def dotnet_tools = new org.devops.dotnet()
+def public_mod = new org.devops.public_mod()
 
 pipeline{
     agent{
@@ -92,6 +93,8 @@ pipeline{
                     //dotnet部署参数
                     dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${Deploy_env}-values.yaml")
 
+                    //docker镜像
+                    public_mod.Harbor_tag([Deploy_env: "${Deploy_env}",serviceName:"${projectName}"])
 
 
 
@@ -122,6 +125,8 @@ pipeline{
                 println "CanaryProd:"+CanaryProd
                 println "headersKey:"+headersKey
                 println "headersValue:"+headersValue
+                println "其他："
+                println "IMAGE_Name:"+IMAGE_Name
             }
         }
 
