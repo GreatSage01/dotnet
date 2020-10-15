@@ -99,6 +99,8 @@ pipeline{
                     //k8s资源确认
                     public_mod.K8s_exist([Language:"java",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
 
+                    //左侧展示
+                    public_mod.Wrap([user_name:"${user_name}",projectName:"${projectName}",reversion:"${tag_reversion}",Deploy_env:"${Deploy_env}"])
 
                 }
             }
