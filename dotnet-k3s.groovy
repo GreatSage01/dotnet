@@ -124,23 +124,18 @@ pipeline{
                 environment name: 'project_switch',value: 'deploy'
             }
             steps{
-                if( env.Deploy_env == 'master' ){
-                    script{
+                script{
+                    if( env.Deploy_env == 'master' ){
                         timeout(time: 30, unit: 'MINUTES') {
                             input message:'deploy to master?', submitter: "${approver}"
-                        echo "dev docker image build"
-                        dot.Docker_build([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
-
+                            echo "master docker image build"
                         }
-                    }
-                }else if( env.Deploy_env == 'dev' ){
-                    script{
+                    }else if( env.Deploy_env == 'dev' ){
                         echo "dev docker image build"
                     }
+                    dot.Docker_build([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
                 }
-
             }
-
         }
 
         stage("验证"){
