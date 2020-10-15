@@ -27,6 +27,7 @@ properties([
 @Library('Jenkins-fuyu') _
 def email = new org.email.email()
 def git = new org.devops.git()
+def dotnet_tools = new org.devops.dotnet()
 
 pipeline{
     agent{
@@ -77,8 +78,9 @@ pipeline{
         stage("初始化"){
             steps{
                 script{
-                    dot.Proj_small("${project_name}")
-                    //env.projectName=dotnet.Proj_small("${project_name}")
+                    dotnet_tools.Proj_small("${project_name}")
+
+
 
                 }
             }
