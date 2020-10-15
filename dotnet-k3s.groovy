@@ -84,10 +84,14 @@ pipeline{
                     env.Deploy_env="${project_branch}"
                     
                     //部署k8s认证信息
-                    k8s.KubeConfig("Deploy_env")
+                    k8s.KubeConfig("${Deploy_env}")
 
                     //项目yaml文件保存路径
                     env.Yml_path="/home/jenkins/deployment/${Deploy_env}/${project_name}"
+
+                    //dotnet部署参数
+                    dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${Deploy_env}-values.yaml")
+
 
 
 
@@ -105,6 +109,19 @@ pipeline{
                 println "Gitlab_Url:"+ Gitlab_Url
                 println "Gitlab_Cred: "+ Gitlab_Cred
                 println "projectName:" + projectName
+                println "dotnet 部署参数"
+                println "deployEnv:"+deployEnv
+                println "nameSpaces:"+nameSpaces
+                println "projectName_cs:"+projectName_cs
+                println "domainName:"+domainName
+                println "serviceName:"+serviceName
+                println "urlPath:"+urlPath
+                println "healthCheck:"+healthCheck
+                println "podNum:"+podNum
+                println "isCanary:"+isCanary
+                println "CanaryProd:"+CanaryProd
+                println "headersKey:"+headersKey
+                println "headersValue:"+headersValue
             }
         }
 
