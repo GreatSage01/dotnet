@@ -93,7 +93,7 @@ pipeline{
                     //dotnet部署参数
                     dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${Deploy_env}-values.yaml")
 
-                    //docker镜像
+                    //docker镜像,IMAGE_Name
                     public_mod.Harbor_tag([Deploy_env: "${Deploy_env}",projectName:"${serviceName}"])
 
                     //k8s资源确认
@@ -124,6 +124,20 @@ pipeline{
                 environment name: 'project_switch',value: 'deploy'
             }
             steps{
+                if( env.Deploy_env == 'master' ){
+                    script{
+                        timeout(time: 30, unit: 'MINUTES') {
+                            input message:'deploy to master?', submitter: "${approver}"
+                        echo "dev docker image build"
+                        dot.Docker_build([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
+
+                        }
+                    }
+                }else if( env.Deploy_env == 'dev' ){
+                    script{
+                        echo "dev docker image build"
+                    }
+                }
 
             }
 
@@ -155,6 +169,7 @@ pipeline{
                 println "IMAGE_Name:"+IMAGE_Name
                 println "svc_exist:"+svc_exist
                 println "ingress_exist:"+ingress_exist
+                println "approver:"+approver
 
             }
         }
