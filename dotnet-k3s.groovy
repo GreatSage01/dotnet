@@ -143,7 +143,7 @@ pipeline{
             }
             steps{
                 script{
-                    dot.test()
+                    dot.mytest()
                     dot.Deploy()
                 }
             }           
