@@ -51,22 +51,12 @@ pipeline{
         stage("配置读取"){
             steps{
                 script{
-                    value.read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
-                    value.read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
+                    com.Read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
+                    com.Read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
                 }
             }
         }
 
-        stage("验证"){
-            steps{
-                println "Prod_k8sUrl:" + Prod_k8sUrl
-                println "Prod_k8sCred:"+Prod_k8sCred
-                println "HUB_Url:"+HUB_Url
-                println "HUB_Cred:"+HUB_Cred
-                println "Gitlab_Url:"+ Gitlab_Url
-                println "Gitlab_Cred: "+ Gitlab_Cred
-            }
-        }
 
         stage("Git检出"){
             when{
@@ -84,6 +74,26 @@ pipeline{
             }
         }
 
+        stage("初始化"){
+            steps{
+                script{
+                    env.projectName=dotnet.Proj_small("${project_name}")
+
+                }
+            }
+        }
+
+        stage("验证"){
+            steps{
+                println "Prod_k8sUrl:" + Prod_k8sUrl
+                println "Prod_k8sCred:"+Prod_k8sCred
+                println "HUB_Url:"+HUB_Url
+                println "HUB_Cred:"+HUB_Cred
+                println "Gitlab_Url:"+ Gitlab_Url
+                println "Gitlab_Cred: "+ Gitlab_Cred
+                println "projectName:" + projectName
+            }
+        }
 
 
 
