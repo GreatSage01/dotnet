@@ -133,6 +133,7 @@ pipeline{
                     }else if( env.Deploy_env == 'dev' ){
                         echo "dev docker image build"
                     }
+                    dot.mytest()
                 }
             }
         }
@@ -143,7 +144,6 @@ pipeline{
             }
             steps{
                 script{
-                    dot.mytest()
                     dot.Deploy()
                 }
             }           
