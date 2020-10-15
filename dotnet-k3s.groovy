@@ -143,7 +143,7 @@ pipeline{
             }
             steps{
                 script{
-                    dot.ImagesBuild([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
+                    //dot.ImagesBuild([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
                     dot.Deploy()
                 }
             }           
