@@ -51,8 +51,8 @@ pipeline{
         stage("配置读取"){
             steps{
                 script{
-                    Comm.Read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
-                    Comm.Read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
+                    com.Read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
+                    com.Read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
                 }
             }
         }
@@ -77,7 +77,7 @@ pipeline{
         stage("初始化"){
             steps{
                 script{
-                    Dotnet.Proj_small("${project_name}")
+                    dotNet.Proj_small("${project_name}")
                     //env.projectName=dotnet.Proj_small("${project_name}")
 
                 }
