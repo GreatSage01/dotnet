@@ -94,9 +94,10 @@ pipeline{
                     dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${Deploy_env}-values.yaml")
 
                     //docker镜像
-                    public_mod.Harbor_tag([Deploy_env: "${Deploy_env}",serviceName:"${projectName}"])
+                    public_mod.Harbor_tag([Deploy_env: "${Deploy_env}",projectName:"${serviceName}"])
 
-
+                    //k8s资源确认
+                    public_mod.K8s_exist([Language:"${Language}",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
 
 
                 }
@@ -127,6 +128,9 @@ pipeline{
                 println "headersValue:"+headersValue
                 println "其他："
                 println "IMAGE_Name:"+IMAGE_Name
+                println "svc_exist:"+svc_exist
+                println "ingress_exist:"+ingress_exist
+
             }
         }
 
