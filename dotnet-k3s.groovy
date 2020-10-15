@@ -112,11 +112,21 @@ pipeline{
             steps{
                 script{
                     def csproj_path="${env.WORKSPACE}/${project_name}/src/${projectName_cs}"
-                    def app_path="${WORKSPACE}/${project_name}/app/publish"
+                    def app_path="${env.WORKSPACE}/${project_name}/app/publish"
                     //build
-                    dot.Build([projectName_cs:"${projectName_cs}",csproj_path:"${csproj_path}",app_path:"${app_path}",])
+                    dot.Build([projectName_cs:"${projectName_cs}",csproj_path:"${csproj_path}",app_path:"${app_path}"])
                 }
             }
+        }
+
+        stage("Docker Image"){
+            when{
+                environment name: 'project_switch',value: 'deploy'
+            }
+            steps{
+
+            }
+
         }
 
         stage("验证"){
