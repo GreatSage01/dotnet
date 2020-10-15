@@ -98,8 +98,23 @@ pipeline{
 
                     //k8s资源确认
                     public_mod.K8s_exist([Language:"java",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
-                                    //左侧展示
+                    
+                    //左侧展示
                     public_mod.Wrap([user_name: "${user_name}",projectName:"${projectName}",reversion:"${tag_reversion}",Deploy_env:"${Deploy_env}"])
+                }
+            }
+        }
+
+        stage("构建"){
+            when {
+                expression { "${project_switch}" == 'deploy' }
+            }
+            steps{
+                script{
+                    def csproj_path="${env.WORKSPACE}/${project_name}/src/${projectName_cs}"
+                    def app_path="${WORKSPACE}/${project_name}/app/publish"
+                    //build
+                    dot.Build([projectName_cs:"${projectName_cs}",csproj_path:"${csproj_path}",app_path:"${app_path}",])
                 }
             }
         }
