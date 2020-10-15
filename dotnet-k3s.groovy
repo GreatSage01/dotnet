@@ -144,7 +144,7 @@ pipeline{
             }
             steps{
                 script{
-                    
+                    dot.Deploy()
                 }
             }           
         }
