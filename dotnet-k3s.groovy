@@ -51,8 +51,8 @@ pipeline{
         stage("配置读取"){
             steps{
                 script{
-                    Com.Read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
-                    Com.Read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
+                    Comm.Read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
+                    Comm.Read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
                 }
             }
         }
