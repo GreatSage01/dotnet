@@ -80,6 +80,16 @@ pipeline{
                 script{
                     dotnet_tools.ProjectName_small("${project_name}")
 
+                    //发布环境
+                    env.Deploy_env="${project_branch}"
+                    
+                    //部署k8s认证信息
+                    k8s.KubeConfig("${Deploy_env}")
+
+                    //项目yaml文件保存路径
+                    env.Yml_path="/home/jenkins/deployment/${Deploy_env}/${project_name}"
+
+
 
 
                 }
