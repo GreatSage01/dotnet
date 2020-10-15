@@ -78,7 +78,7 @@ pipeline{
         stage("初始化"){
             steps{
                 script{
-                    dotnet_tools.Proj_small("${project_name}")
+                    dotnet_tools.ProjectName_small("${project_name}")
 
 
 
