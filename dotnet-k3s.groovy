@@ -77,7 +77,7 @@ pipeline{
         stage("初始化"){
             steps{
                 script{
-                    dotnet.Proj_small("${project_name}")
+                    Dotnet.Proj_small("${project_name}")
                     //env.projectName=dotnet.Proj_small("${project_name}")
 
                 }
