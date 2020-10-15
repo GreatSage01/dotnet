@@ -133,7 +133,7 @@ pipeline{
                     }else if( env.Deploy_env == 'dev' ){
                         echo "dev docker image build"
                     }
-                    dot.test([project_name="${project_name}",Deploy_env="${Deploy_env}",IMAGE_Name="${IMAGE_Name}"])
+                    dot.test()
                 }
             }
         }
