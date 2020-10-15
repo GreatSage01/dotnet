@@ -97,7 +97,7 @@ pipeline{
                     public_mod.Harbor_tag([Deploy_env: "${Deploy_env}",projectName:"${serviceName}"])
 
                     //k8s资源确认
-                    public_mod.K8s_exist([Language:"${Language}",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
+                    public_mod.K8s_exist([Language:"java",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
 
 
                 }
