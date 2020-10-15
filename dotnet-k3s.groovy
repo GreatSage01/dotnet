@@ -84,7 +84,7 @@ pipeline{
                     env.Deploy_env="${project_branch}"
                     
                     //部署k8s认证信息
-                    k8s.KubeConfig("${Deploy_env}")
+                    k8s.KubeConfig("frontend-master")
 
                     //项目yaml文件保存路径
                     env.Yml_path="/home/jenkins/deployment/${Deploy_env}/${project_name}"
@@ -98,8 +98,8 @@ pipeline{
 
         stage("验证"){
             steps{
-                println "Prod_k8sUrl:" + Prod_k8sUrl
-                println "Prod_k8sCred:"+Prod_k8sCred
+                println "k8s_url:" + k8s_url
+                println "k8s_credentials:"+k8s_credentials
                 println "HUB_Url:"+HUB_Url
                 println "HUB_Cred:"+HUB_Cred
                 println "Gitlab_Url:"+ Gitlab_Url
