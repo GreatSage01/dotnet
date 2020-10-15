@@ -138,6 +138,17 @@ pipeline{
             }
         }
 
+        stage("部署k8s"){
+             when{
+                environment name: 'project_switch',value: 'deploy'
+            }
+            steps{
+                script{
+                    
+                }
+            }           
+        }
+
         stage("验证"){
             steps{
                 println "k8s_url:" + k8s_url
