@@ -164,6 +164,7 @@ pipeline{
                     com.Create_consul()
                 }
             }
+        }
 
         // 测试
         stage('测试'){
@@ -223,19 +224,19 @@ pipeline{
             }
         }
 
-        //stage("回滚"){
-        //   when{
-        //       allOf{
-        //           expression { "${project_switch}" == "rollback" }
-        //       }
-        //    }
-        //    steps {
-        //        timeout(time: 30, unit: 'MINUTES') {
-        //            script {
-        //                com.Roll_back()
-        //            }
-        //        }
-        //    }
-        //}
+        stage("回滚"){
+           when{
+               allOf{
+                   expression { "${project_switch}" == "rollback" }
+               }
+            }
+            steps {
+                timeout(time: 30, unit: 'MINUTES') {
+                    script {
+                        com.Roll_back()
+                    }
+                }
+            }
+        }
     }
 }
