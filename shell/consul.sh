@@ -3,15 +3,17 @@
 #projectName 项目名称
 #group 开发组名
 
-sub_domain=$1
-projectName=$2
-group=$3
+APPHOME=$!
+sub_domain=$2
+projectName=$3
+deployEnv=$4
+healthCheck=$5
+group=$6
 
-APPHOME="/root/k8s-template/json/data/${group}"
+APPHOME="${APPHOME}"
 consul_url='http://172.16.0.94:8500/v1/agent/service/register?replace-existing-checks=1'
 
 
-`mkdir -p "${APPHOME}"`
 json_file="${APPHOME}/${projectName}.json"
 
 
@@ -19,15 +21,15 @@ cat>${json_file}<<EOF
 {
 "id": "${projectName}",
 "name": "${group}",
-"address": "https://${sub_domain}.xueerqin.net/${projectName}/health",
+"address": "https://${sub_domain}.xueerqin.net${healthCheck}",
 "port": 80,
 "meta":{
         "Group": "${group}",
         "Project":"${projectName}"
 },
-"tags": ["master"],
+"tags": ["${deployEnv}"],
 "checks": [
-{"http": "https://${sub_domain}.xueerqin.net/${projectName}/health",
+{"http": "https://${sub_domain}.xueerqin.net${healthCheck}",
 "interval": "60s"}]
 }
 EOF

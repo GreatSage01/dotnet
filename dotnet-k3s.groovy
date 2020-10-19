@@ -138,7 +138,7 @@ pipeline{
         }
 
         stage("部署k8s"){
-             when{
+            when{
                 environment name: 'project_switch',value: 'deploy'
             }
             steps{
@@ -148,6 +148,47 @@ pipeline{
             }           
         }
 
+        stage("创建ingress"){
+            when{
+                allOf {
+                    expression { "${project_switch}" == 'deploy' };
+                    not {expression { "${env.ingress_exist}" == "${env.serviceName}-tls" }}
+                }    
+            }
+            steps{
+                script{
+                    dot.Cread_ingress()
+                    Public.Create_consul()
+                }
+            }
+
+        // 测试
+        stage('测试'){
+            when{
+                expression { "${project_switch}" == 'deploy' }
+            }
+            steps{
+                sh '''/bin/bash
+                    echo 'to do'
+                '''
+            }
+        }
+
+        //清理环境
+        stage('清理'){
+            when{
+                expression { "${project_switch}" == 'deploy' }
+            }
+            steps{
+                script{
+                    sh '''/bin/bash
+                        docker rmi -f ${IMAGE_Name}
+                        rm -rf ${WORKSPACE}/${project_name}/app
+                    '''
+                }
+            }
+        }
+        
         stage("验证"){
             steps{
                 println "k8s_url:" + k8s_url
@@ -179,8 +220,19 @@ pipeline{
             }
         }
 
-
-
-
+        stage("回滚"){
+           when{
+               allOf{
+                   expression { "${project_switch}" == "rollback" }
+               }
+            }
+            steps {
+                timeout(time: 30, unit: 'MINUTES') {
+                    script {
+                        Public.Roll_back()
+                    }
+                }
+            }
+        }
     }
 }
