@@ -79,7 +79,10 @@ pipeline{
         stage("初始化"){
             steps{
                 script{
-                    dotnet_tools.ProjectName_small("${project_name}")
+                    //项目名处理，全部小写,取第二位
+                    def my_split = "${project_name}".toLowerCase().tokenize(".")
+                    def projectName = my_split[1]
+                    env.projectName="${projectName}"
 
                     //发布环境
                     env.Deploy_env="${project_branch}"
@@ -158,7 +161,7 @@ pipeline{
             steps{
                 script{
                     dot.Cread_ingress()
-                    Public.Create_consul()
+                    com.Create_consul()
                 }
             }
 
@@ -229,7 +232,7 @@ pipeline{
             steps {
                 timeout(time: 30, unit: 'MINUTES') {
                     script {
-                        Public.Roll_back()
+                        com.Roll_back()
                     }
                 }
             }
