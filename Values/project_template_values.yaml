@@ -1,2 +1,24 @@
-//部署环境，默认git分支
-deployEnv
+#部署环境，默认git分支
+deployEnv: dev
+#部署命名空间，默认git分支
+nameSpaces: dev
+#dotnet各项目csproj文件名称及路径，例如：FuYu.Education.Website.Web，必要
+projectName:
+#域名，默认 app.xueerqin.net
+domainName: app.xueerqin.net
+#k8s上deploy名,默认是项目中间的名
+serviceName: bdc
+#项目第一级目录，例如：tapp.xueerqin.net/bdc/,就是/bdc/，默认为/bdc/
+urlPath: /bdc/
+#k8s上pod健康检查目录路径。例：/health 或者 /bdc/health
+healthCheck: /bdc/health
+#k8spod 部署数量
+podNum: 1
+#是否金丝雀
+Canary: True
+    #金丝雀pod名
+    CanaryProd: 
+    #金丝雀header信息
+    headersKey:
+    #金丝雀header信息
+    headersValue:
