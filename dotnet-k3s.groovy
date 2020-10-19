@@ -85,25 +85,25 @@ pipeline{
                     env.projectName="${projectName}"
 
                     //发布环境
-                    env.Deploy_env="${project_branch}"
+                    env.deployEnv="${project_branch}"
                     
                     //部署k8s认证信息
-                    k8s.KubeConfig("${Deploy_env}")
+                    k8s.KubeConfig("${deployEnv}")
 
                     //项目yaml文件保存路径
-                    env.Yml_path="/home/jenkins/deployment/${Deploy_env}/${project_name}"
+                    env.Yml_path="/home/jenkins/deployment/${deployEnv}/${project_name}"
 
                     //dotnet部署参数
-                    dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${Deploy_env}-values.yaml")
+                    dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${deployEnv}-values.yaml")
 
                     //docker镜像,IMAGE_Name
-                    public_mod.Harbor_tag([Deploy_env: "${Deploy_env}",projectName:"${serviceName}"])
+                    public_mod.Harbor_tag([deployEnv: "${deployEnv}",projectName:"${serviceName}"])
 
                     //k8s资源确认
                     public_mod.K8s_exist([Language:"java",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
                     
                     //左侧展示
-                    public_mod.Wrap([user_name: "${user_name}",projectName:"${projectName}",reversion:"${tag_reversion}",Deploy_env:"${Deploy_env}"])
+                    public_mod.Wrap([user_name: "${user_name}",projectName:"${projectName}",reversion:"${tag_reversion}",deployEnv:"${deployEnv}"])
                 }
             }
         }
@@ -127,15 +127,15 @@ pipeline{
             }
             steps{
                 script{
-                    if( env.Deploy_env == 'master' ){
+                    if( env.deployEnv == 'master' ){
                         timeout(time: 30, unit: 'MINUTES') {
                             input message:'deploy to master?', submitter: "${approver}"
                             echo "master docker image build"
                         }
-                    }else if( env.Deploy_env == 'dev' ){
+                    }else if( env.deployEnv == 'dev' ){
                         echo "dev docker image build"
                     }
-                    dot.BuildImage([project_name:"${project_name}",Deploy_env:"${Deploy_env}",IMAGE_Name:"${IMAGE_Name}"])
+                    dot.BuildImage([project_name:"${project_name}",deployEnv:"${deployEnv}",IMAGE_Name:"${IMAGE_Name}"])
                 }
             }
         }
