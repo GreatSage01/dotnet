@@ -156,7 +156,7 @@ pipeline{
                 allOf {
                     expression { "${project_switch}" == 'deploy' };
                     not {expression { "${env.ingress_exist}" == "${env.serviceName}-tls" }}
-                }    
+                }
             }
             steps{
                 script{
@@ -223,19 +223,19 @@ pipeline{
             }
         }
 
-        stage("回滚"){
-           when{
-               allOf{
-                   expression { "${project_switch}" == "rollback" }
-               }
-            }
-            steps {
-                timeout(time: 30, unit: 'MINUTES') {
-                    script {
-                        com.Roll_back()
-                    }
-                }
-            }
-        }
+        //stage("回滚"){
+        //   when{
+        //       allOf{
+        //           expression { "${project_switch}" == "rollback" }
+        //       }
+        //    }
+        //    steps {
+        //        timeout(time: 30, unit: 'MINUTES') {
+        //            script {
+        //                com.Roll_back()
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
