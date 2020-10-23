@@ -175,7 +175,7 @@ pipeline{
                 timeout(time: 5, unit: 'SECONDS') {
                     waitUntil{
                         script{
-                            def r_result=sh script:"curl http://172.16.0.94:9110/v1/deployment?namespace=${deployEnv}\&project_name=${serviceName}",returnStdout: true
+                            def r_result=sh script:"curl http://172.16.0.94:9110/v1/deployment?namespace=${deployEnv}\\&project_name=${serviceName}",returnStdout: true
                             println r_result.result
                             def http_status=sh script:"curl https://${domainName}${healthCheck}",returnStdout: true
                             println http_status
