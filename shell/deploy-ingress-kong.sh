@@ -24,7 +24,7 @@ else
 domainName="t"${domainName}
 fi
 
-if not ${fjfuyu_net} ;then
+if ( ${fjfuyu_net} ) ;then
 cat >${serviceName}-${nameSpaces}-ingress-kong.yaml<<EOF
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -32,12 +32,13 @@ metadata:
   name: ${serviceName}-tls
   namespace: ${nameSpaces}
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-fjfuyu
     kubernetes.io/ingress.class: "kong"
 spec:
   tls:
-  - secretName: xueerqin-cert
+  - secretName: app-fjfuyu-net
     hosts:
-    - '*.xueerqin.net'
+    - '*.app.fjfuyu.net'
   rules:
   - host: ${domainName}
     http:
@@ -55,13 +56,12 @@ metadata:
   name: ${serviceName}-tls
   namespace: ${nameSpaces}
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-fjfuyu
     kubernetes.io/ingress.class: "kong"
 spec:
   tls:
-  - secretName: app-fjfuyu-net
+  - secretName: xueerqin-cert
     hosts:
-    - '*.app.fjfuyu.net'
+    - '*.xueerqin.net'
   rules:
   - host: ${domainName}
     http:
