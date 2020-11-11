@@ -24,7 +24,7 @@ else
 domainName="t"${domainName}
 fi
 
-if [ ${fjfuyu_net} ];then
+if not ${fjfuyu_net} ;then
 cat >${serviceName}-${nameSpaces}-ingress-kong.yaml<<EOF
 apiVersion: extensions/v1beta1
 kind: Ingress
