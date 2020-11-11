@@ -15,10 +15,13 @@ healthCheck: /bdc/health
 #k8spod 部署数量
 podNum: 1
 #是否金丝雀
-Canary: True
+Canary: false
     #金丝雀pod名
     CanaryProd: 
     #金丝雀header信息
     headersKey:
     #金丝雀header信息
     headersValue:
+    
+#是否使用fjfuyu.net 域名
+fjfuyu_net: false
