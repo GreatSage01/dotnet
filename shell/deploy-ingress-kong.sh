@@ -16,12 +16,18 @@ urlPath=$4
 fjfuyu_net=$5
 Yml_path=$6
 
+
+
 cd ${Yml_path}
 
 if [ n${nameSpaces} == n"master" ];then
 domainName=${domainName}
+fjfuyu_secretName="app-fjfuyu-net"
+fjfuyu_hosts="*.app.fjfuyu.net"
 else
 domainName="t"${domainName}
+fjfuyu_secretName="t-app-fjfuyu-net"
+fjfuyu_hosts="*.t-app.fjfuyu.net"
 fi
 
 if [ n${fjfuyu_net} == n"true" ] ;then
@@ -36,9 +42,9 @@ metadata:
     kubernetes.io/ingress.class: "kong"
 spec:
   tls:
-  - secretName: app-fjfuyu-net
+  - secretName: ${fjfuyu_secretName}
     hosts:
-    - '*.app.fjfuyu.net'
+    - "${fjfuyu_hosts}"
   rules:
   - host: ${domainName}
     http:
