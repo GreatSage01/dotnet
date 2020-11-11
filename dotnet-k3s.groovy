@@ -161,7 +161,9 @@ pipeline{
             steps{
                 script{
                     dot.Cread_ingress()
-                    com.Create_consul()
+                    if( env.deployEnv == 'master' ){
+                        com.Create_consul()
+                    }
                 }
             }
         }
