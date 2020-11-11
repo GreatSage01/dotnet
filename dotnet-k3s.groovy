@@ -218,7 +218,7 @@ pipeline{
                 println "urlPath:"+urlPath
                 println "healthCheck:"+healthCheck
                 println "podNum:"+podNum
-                println "isCanary:"+isCanary
+                println "Canary:"+Canary
                 println "CanaryProd:"+CanaryProd
                 println "headersKey:"+headersKey
                 println "headersValue:"+headersValue
