@@ -195,8 +195,8 @@ pipeline{
             steps{
                 script{
                     sh '''/bin/bash
-                        docker rmi -f ${IMAGE_Name}
-                        rm -rf ${WORKSPACE}/${project_name}/app
+                        #docker rmi -f ${IMAGE_Name}
+                        #rm -rf ${WORKSPACE}/${project_name}/app
                     '''
                 }
             }
