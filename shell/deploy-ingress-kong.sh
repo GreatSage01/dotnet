@@ -22,12 +22,12 @@ cd ${Yml_path}
 
 if [ n${nameSpaces} == n"master" ];then
 domainName=${domainName}
-fjfuyu_secretName="app-fjfuyu-net"
-fjfuyu_hosts="*.app.fjfuyu.net"
+fjfuyu_secretName="edu-fjfuyu-net"
+fjfuyu_hosts="*.edu.fjfuyu.net"
 else
 domainName="t"${domainName}
-fjfuyu_secretName="t-app-fjfuyu-net"
-fjfuyu_hosts="*.t-app.fjfuyu.net"
+fjfuyu_secretName="edu-fjfuyu-net"
+fjfuyu_hosts="*.edu.fjfuyu.net"
 fi
 
 if [ n${fjfuyu_net} == n"true" ] ;then
