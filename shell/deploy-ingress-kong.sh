@@ -20,6 +20,9 @@ Yml_path=$6
 
 cd ${Yml_path}
 
+
+
+if [ n${fjfuyu_net} == n"true" ] ;then
 if [ n${nameSpaces} == n"master" ];then
 domainName=${domainName}
 fjfuyu_secretName=`echo ${domainName}|awk -F . '{print  $2 "-" $3 "-" $4 }'`
@@ -30,7 +33,6 @@ fjfuyu_secretName=`echo ${domainName}|awk -F . '{print  $2 "-" $3 "-" $4 }'`
 fjfuyu_hosts=`echo ${domainName}|awk -F . '{ print "*." $2 "." $3 "." $4 }'`
 fi
 
-if [ n${fjfuyu_net} == n"true" ] ;then
 cat >${serviceName}-${nameSpaces}-ingress-kong.yaml<<EOF
 apiVersion: extensions/v1beta1
 kind: Ingress
