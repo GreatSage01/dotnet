@@ -103,7 +103,7 @@ pipeline{
                     public_mod.K8s_exist([Language:"java",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
                     
                     //左侧展示
-                    public_mod.Wrap([user_name: "${user_name}",projectName:"${projectName}",reversion:"${tag_reversion}",deployEnv:"${deployEnv}"])
+                    public_mod.Wrap([user_name: "${user_name}",projectName:"${serviceName}",reversion:"${tag_reversion}",deployEnv:"${deployEnv}"])
                 }
             }
         }
