@@ -22,12 +22,12 @@ cd ${Yml_path}
 
 if [ n${nameSpaces} == n"master" ];then
 domainName=${domainName}
-fjfuyu_secretName="edu-fjfuyu-net"
-fjfuyu_hosts="*.edu.fjfuyu.net"
+fjfuyu_secretName=`echo ${domainName}|awk -F . '{print  $2 "-" $3 "-" $4 }'`
+fjfuyu_hosts=`echo ${domainName}|awk -F . '{ print "*." $2 "." $3 "." $4 }'`
 else
 domainName=${domainName}
-fjfuyu_secretName="edu-fjfuyu-net"
-fjfuyu_hosts="*.edu.fjfuyu.net"
+fjfuyu_secretName=`echo ${domainName}|awk -F . '{print  $2 "-" $3 "-" $4 }'`
+fjfuyu_hosts=`echo ${domainName}|awk -F . '{ print "*." $2 "." $3 "." $4 }'`
 fi
 
 if [ n${fjfuyu_net} == n"true" ] ;then
