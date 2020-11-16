@@ -57,6 +57,11 @@ spec:
           servicePort: 80
 EOF
 else
+if [ n${nameSpaces} == n"master" ];then
+domainName=${domainName}
+else
+domainName="t"${domainName}
+fi
 cat >${serviceName}-${nameSpaces}-ingress-kong.yaml<<EOF
 apiVersion: extensions/v1beta1
 kind: Ingress
