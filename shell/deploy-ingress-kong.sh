@@ -25,7 +25,7 @@ domainName=${domainName}
 fjfuyu_secretName="edu-fjfuyu-net"
 fjfuyu_hosts="*.edu.fjfuyu.net"
 else
-domainName="t"${domainName}
+domainName=${domainName}
 fjfuyu_secretName="edu-fjfuyu-net"
 fjfuyu_hosts="*.edu.fjfuyu.net"
 fi
