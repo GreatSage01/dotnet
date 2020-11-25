@@ -40,7 +40,7 @@ pipeline{
         // The Timestamper plugin adds timestamps to the console output of Jenkins jobs
         // https://plugins.jenkins.io/timestamper/
         timestamps()
-        buildDiscarder(logRotator(numToKeepStr: '30'))
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
     }
 
     environment{
