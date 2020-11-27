@@ -3,33 +3,33 @@
 #projectName 项目名称
 #group 开发组名
 
-APPHOME=$!
-sub_domain=$2
-projectName=$3
+Yml_path=$1
+domainName=$2
+serviceName=$3
 deployEnv=$4
 healthCheck=$5
-group=$6
+Language=$6
 
-APPHOME="${APPHOME}"
+
 consul_url='http://172.16.0.94:8500/v1/agent/service/register?replace-existing-checks=1'
 
 
-json_file="${APPHOME}/${projectName}.json"
+json_file="${Yml_path}/${serviceName}.json"
 
 
 cat>${json_file}<<EOF
 {
-"id": "${projectName}",
-"name": "${group}",
-"address": "https://${sub_domain}.xueerqin.net${healthCheck}",
+"id": "${serviceName}",
+"name": "${Language}",
+"address": "https://${domainName}.xueerqin.net${healthCheck}",
 "port": 80,
 "meta":{
-        "Group": "${group}",
-        "Project":"${projectName}"
+        "Group": "${Language}",
+        "Project":"${serviceName}"
 },
 "tags": ["${deployEnv}"],
 "checks": [
-{"http": "https://${sub_domain}.xueerqin.net${healthCheck}",
+{"http": "https://${domainName}.xueerqin.net${healthCheck}",
 "interval": "60s"}]
 }
 EOF

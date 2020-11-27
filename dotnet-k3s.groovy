@@ -40,7 +40,7 @@ pipeline{
         // The Timestamper plugin adds timestamps to the console output of Jenkins jobs
         // https://plugins.jenkins.io/timestamper/
         timestamps()
-        buildDiscarder(logRotator(numToKeepStr: '30'))
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
     }
 
     environment{
@@ -103,7 +103,7 @@ pipeline{
                     public_mod.K8s_exist([Language:"java",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
                     
                     //左侧展示
-                    public_mod.Wrap([user_name: "${user_name}",projectName:"${projectName}",reversion:"${tag_reversion}",deployEnv:"${deployEnv}"])
+                    public_mod.Wrap([user_name: "${user_name}",projectName:"${serviceName}",reversion:"${tag_reversion}",deployEnv:"${deployEnv}"])
                 }
             }
         }
@@ -161,34 +161,31 @@ pipeline{
             steps{
                 script{
                     dot.Cread_ingress()
-                    com.Create_consul()
+                    if( env.deployEnv == 'master' ){
+                        com.Create_consul()
+                    }
                 }
             }
         }
 
         // 测试
-        stage('测试'){
-            when{
-                expression { "${project_switch}" == 'deploy' }
-            }
-            steps{
-                timeout(time: 5, unit: 'SECONDS') {
-                    waitUntil{
-                        script{
-                            def r_result=sh script:"curl http://172.16.0.94:9110/v1/deployment?namespace=${deployEnv}\\&project_name=${serviceName}",returnStdout: true
-                            def jsonSlurper = new JsonSlurper()
-                            def json=jsonSlurper.parseText(r_result)
-                            println json.result
-                            return
-
-
-                            def http_status=sh script:"curl https://${domainName}${healthCheck}",returnStdout: true
-                            println http_status
-                        }
-                    } 
-                }
-            }
-        }
+        //stage('测试'){
+        //    when{
+        //        expression { "${project_switch}" == 'deploy' }
+        //    }
+        //    steps{
+        //        timeout(time: 5, unit: 'SECONDS') {
+        //            waitUntil{
+        //                script{
+        //                    def r_result=sh script:"curl http://172.16.0.94:9110/v1/deployment?namespace=${deployEnv}\\&project_name=${serviceName}",returnStdout: true
+        //                    println r_result.result
+        //                    def http_status=sh script:"curl https://${domainName}${healthCheck}",returnStdout: true
+        //                    println http_status
+        //                }
+        //            } 
+        //        }
+        //    }
+        //}
 
         //清理环境
         stage('清理'){
@@ -198,8 +195,8 @@ pipeline{
             steps{
                 script{
                     sh '''/bin/bash
-                        docker rmi -f ${IMAGE_Name}
-                        rm -rf ${WORKSPACE}/${project_name}/app
+                        #docker rmi -f ${IMAGE_Name}
+                        #rm -rf ${WORKSPACE}/${project_name}/app
                     '''
                 }
             }
@@ -223,7 +220,7 @@ pipeline{
                 println "urlPath:"+urlPath
                 println "healthCheck:"+healthCheck
                 println "podNum:"+podNum
-                println "isCanary:"+isCanary
+                println "Canary:"+Canary
                 println "CanaryProd:"+CanaryProd
                 println "headersKey:"+headersKey
                 println "headersValue:"+headersValue
