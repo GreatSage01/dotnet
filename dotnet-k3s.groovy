@@ -89,12 +89,7 @@ pipeline{
                     env.deployEnv="${project_branch}"
                     
                     //部署k8s认证信息
-                    (k8s_url,k8s_credentials)=k8s.KubeConfig([deployEnv: "${deployEnv}",
-                                                        Prod_k8sUrl: "${Prod_k8sUrl}",
-                                                        Prod_k8sCred: "${Prod_k8sCred}",
-                                                        Dev_k8sUrl: "${Prod_k8sUrl}",
-                                                        Dev_k8sCred: "${Prod_k8sCred}"
-                                                        ])
+                    k8s.KubeConfig("${deployEnv}")
 
                     //项目yaml文件保存路径
                     env.Yml_path="/home/jenkins/deployment/${deployEnv}/${project_name}"
