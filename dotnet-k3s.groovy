@@ -90,10 +90,10 @@ pipeline{
                     
                     //部署k8s认证信息
                     (K8s_url,K8s_credentials)=k8s.KubeConfig([deployEnv: "${deployEnv}",
-                                                        Prod_k8sUrl: "${com_values.Prod_k8sUrl}",
-                                                        Prod_k8sCred: "${com_values.Prod_k8sCred}",
-                                                        Dev_k8sUrl: "${com_values.Prod_k8sUrl}",
-                                                        Dev_k8sCred: "${com_values.Prod_k8sCred}"
+                                                        Prod_k8sUrl: "${Prod_k8sUrl}",
+                                                        Prod_k8sCred: "${Prod_k8sCred}",
+                                                        Dev_k8sUrl: "${Prod_k8sUrl}",
+                                                        Dev_k8sCred: "${Prod_k8sCred}"
                                                         ])
 
                     //项目yaml文件保存路径
