@@ -54,7 +54,7 @@ pipeline{
             steps{
                 script{
                     com.Read_com_values("${env.WORKSPACE}/jenkinsfile/Values/com_value.yaml")
-                    com.Read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/value.yaml")
+                    com.Read_proj_values("${env.WORKSPACE}/jenkinsfile/Values/project_value.yaml")
                 }
             }
         }
