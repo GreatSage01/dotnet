@@ -89,7 +89,12 @@ pipeline{
                     env.deployEnv="${project_branch}"
                     
                     //部署k8s认证信息
-                    k8s.KubeConfig("${deployEnv}")
+                    (K8s_url,K8s_credentials)=k8s.KubeConfig([deployEnv: "${deployEnv}",
+                                                        Prod_k8sUrl: "${com_values.Prod_k8sUrl}",
+                                                        Prod_k8sCred: "${com_values.Prod_k8sCred}",
+                                                        Dev_k8sUrl: "${com_values.Prod_k8sUrl}",
+                                                        Dev_k8sCred: "${com_values.Prod_k8sCred}"
+                                                        ])
 
                     //项目yaml文件保存路径
                     env.Yml_path="/home/jenkins/deployment/${deployEnv}/${project_name}"
@@ -98,7 +103,7 @@ pipeline{
                     dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${deployEnv}-values.yaml")
 
                     //docker镜像,IMAGE_Name
-                    public_mod.Harbor_tag([deployEnv: "${deployEnv}",projectName:"${serviceName}"])
+                    public_mod.Harbor_tag([deployEnv: "${deployEnv}",projectName:"${serviceName}"],HUB_Url:"${HUB_Url}")
 
                     //k8s资源确认
                     public_mod.K8s_exist([Language:"${env.Language}",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
