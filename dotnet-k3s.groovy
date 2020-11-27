@@ -30,6 +30,7 @@ def git = new org.devops.git()
 def dotnet_tools = new org.devops.dotnet()
 def public_mod = new org.devops.public_mod()
 
+
 pipeline{
     agent{
         kubernetes {
@@ -100,7 +101,7 @@ pipeline{
                     public_mod.Harbor_tag([deployEnv: "${deployEnv}",projectName:"${serviceName}"])
 
                     //k8s资源确认
-                    public_mod.K8s_exist([Language:"java",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
+                    public_mod.K8s_exist([Language:"${env.Language}",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
                     
                     //左侧展示
                     public_mod.Wrap([user_name: "${user_name}",projectName:"${serviceName}",reversion:"${tag_reversion}",deployEnv:"${deployEnv}"])
