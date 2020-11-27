@@ -103,7 +103,7 @@ pipeline{
                     dot.build_values("${env.WORKSPACE}/${project_name}/deploy-config/${deployEnv}-values.yaml")
 
                     //docker镜像,IMAGE_Name
-                    public_mod.Harbor_tag([deployEnv: "${deployEnv}",projectName:"${serviceName}"],HUB_Url:"${HUB_Url}")
+                    public_mod.Harbor_tag([deployEnv: "${deployEnv}",projectName:"${serviceName}",HUB_Url:"${HUB_Url}"])
 
                     //k8s资源确认
                     public_mod.K8s_exist([Language:"${env.Language}",serviceName:"${serviceName}",nameSpaces:"${nameSpaces}"])
