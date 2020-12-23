@@ -17,7 +17,7 @@ properties([
                 script: 'return [\'error\']'],
             script: [classpath: [],
                 sandbox: false,
-                script: 'return [\'curl\', \'http://172.16.0.94:9999/v1/gitlab?token=9jAzgpnqiXgxqbKu1KF2&groupname=server-side\'].execute().text.readLines()']
+                script: 'return [\'curl\', \'http://172.16.0.94:9991/v1/gitlab?token=9jAzgpnqiXgxqbKu1KF2&groupname=server-side\'].execute().text.readLines()']
         ]],
         choice(choices: ['dev', 'master'], description: 'dev---------测试<br>master-----正式', name: 'project_branch'),
         string(defaultValue: '', description: '接收gitlab webhook触发用户（注：无需填写）', name: 'user_name', trim: true)
