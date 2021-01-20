@@ -82,7 +82,8 @@ pipeline{
                                 git config --global credential.helper store
                                 git submodule foreach --recursive "(git checkout ${project_branch} && git pull --ff origin ${project_branch} ) || true" 
                                 git submodule update --init --recursive
-                            '''                    
+                            '''        
+                        }
                     
                 }
             }
