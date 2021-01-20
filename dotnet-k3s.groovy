@@ -83,9 +83,8 @@ pipeline{
                     //             git submodule foreach --recursive "(git checkout ${project_branch} && git pull --ff origin ${project_branch} ) || true" 
                     //             git submodule update --init --recursive
                     //         '''        
-                        }
-                    }
-                }
+                    //    }
+                    //
             }
         }
 
