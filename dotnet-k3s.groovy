@@ -77,7 +77,7 @@ pipeline{
                     //git子模块更新
                     
                     
-                    
+                
                     dir(path:"./${project_name}"){
                         withEnv(["project_branch=${project_branch}"]){
                             sh '''
