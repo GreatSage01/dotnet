@@ -84,7 +84,7 @@ pipeline{
                                 git submodule update --init --recursive
                             '''        
                         }
-                    
+                    }
                 }
             }
         }
