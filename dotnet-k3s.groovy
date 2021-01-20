@@ -73,6 +73,17 @@ pipeline{
                                Gitlab_Branch:"${project_branch}",
                                Gitlab_Cred:"${Gitlab_Cred}",
                                Gitlab_Url:"${Gitlab_Url}"])
+                
+                    //git子模块更新
+                    dir(path:"./${project_name}"){
+                        withEnv(["project_branch=${project_branch}"]){
+                            sh '''
+                                echo 'http://Jenkins:wdCyF6PDz7HVx8hJBfri@git.fjfuyu.net'> ~/.git-credentials
+                                git config --global credential.helper store
+                                git submodule foreach --recursive "(git checkout ${project_branch} && git pull --ff origin ${project_branch} ) || true" 
+                                git submodule update --init --recursive
+                            '''                    
+                    
                 }
             }
         }
